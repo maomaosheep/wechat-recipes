@@ -1,0 +1,22 @@
+<view class="login-root">
+  <floating-particles
+    enabled="{{particlesEnabled}}"
+    count="{{particleOptions.count}}"
+    density="{{particleOptions.density}}"
+    opacity="{{particleOptions.opacity}}"
+  />
+
+  <view class="page-shell login-page">
+    <view class="hero">
+      <text class="eyebrow">Couple Kitchen</text>
+      <text class="title">登录与组队</text>
+      <text class="subtitle">授权后会自动获取你的微信头像和昵称，饭友小队里就能认出你。</text>
+    </view>
+
+    <view class="panel">
+      <button class="primary-btn" bindtap="authorizeProfile" loading="{{authorizing}}">
+        微信授权登录
+      </button>
+    </view>
+  </view>
+</view>

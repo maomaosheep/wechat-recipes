@@ -1,0 +1,47 @@
+<floating-particles enabled="{{true}}" count="{{72}}" density="high" opacity="{{0.62}}" />
+<view class="page-shell favorites-page">
+  <view class="page-head">
+    <text class="eyebrow">Favorites</text>
+    <text class="title">收藏</text>
+  </view>
+
+  <view wx:if="{{favorites.length}}" class="favorite-list">
+    <scroll-view
+      wx:for="{{favorites}}"
+      wx:key="id"
+      class="swipe-scroll"
+      scroll-x="{{true}}"
+      enhanced="{{true}}"
+      show-scrollbar="{{false}}"
+      scroll-with-animation="{{true}}"
+      scroll-left="{{item.scrollLeft}}"
+    >
+      <view class="swipe-track">
+        <view
+          class="favorite-card soft-card"
+          data-id="{{item.id}}"
+          bindtap="openDetail"
+        >
+          <image class="favorite-image" src="{{item.cover || item.image}}" mode="aspectFill"></image>
+          <view class="favorite-info">
+            <text class="favorite-title">{{item.title || item.name}}</text>
+            <text class="favorite-desc">{{item.desc || item.description}}</text>
+          </view>
+        </view>
+        <view
+          class="delete-action"
+          data-id="{{item.id}}"
+          data-index="{{index}}"
+          catchtap="confirmDeleteRecipe"
+        >
+          删除
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view wx:else class="empty soft-card">
+    <text class="empty-title">还没有收藏</text>
+    <text class="empty-text">看到喜欢的菜谱后，可以先收藏起来。</text>
+  </view>
+</view>

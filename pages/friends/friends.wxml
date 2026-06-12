@@ -1,0 +1,122 @@
+<view class="friends-root">
+  <floating-particles
+    enabled="{{particlesEnabled}}"
+    count="{{particleOptions.count}}"
+    density="{{particleOptions.density}}"
+    opacity="{{particleOptions.opacity}}"
+  />
+
+  <view class="page-shell friends-page">
+    <view class="friends-hero">
+      <view class="hero-copy">
+        <text class="eyebrow">Food Buddies</text>
+        <text class="hero-title">饭友小队</text>
+        <text class="hero-desc">{{hasTeam ? team.slogan : '登录后创建小队，或通过好友分享卡片加入。'}}</text>
+      </view>
+      <view class="team-meter">
+        <text class="meter-num">{{memberCount}}</text>
+        <text class="meter-label">/ 3 人</text>
+      </view>
+    </view>
+
+    <view class="profile-card soft-card">
+      <view class="profile-row">
+        <image wx:if="{{profile.avatarUrl}}" class="profile-avatar" src="{{profile.avatarUrl}}" mode="aspectFill"></image>
+        <view wx:else class="profile-avatar placeholder"></view>
+        <view class="profile-copy">
+          <text class="profile-name">{{profile.nickName || '还没有登录'}}</text>
+          <text class="profile-tip">{{hasProfile ? '已连接你的微信身份' : '登录后可创建或加入小队'}}</text>
+        </view>
+      </view>
+      <button wx:if="{{!hasProfile}}" class="primary-btn" bindtap="goLogin">微信授权登录</button>
+    </view>
+
+    <view wx:if="{{shareInviteCode && !hasTeam}}" class="share-join-card soft-card">
+      <text class="form-title">好友邀请</text>
+      <text class="share-join-text">
+        {{shareJoinStatus === 'joining' ? '正在加入好友小队...' : (shareJoinStatus === 'needLogin' ? '登录后将自动加入好友小队' : '已收到好友分享，正在准备加入')}}
+      </text>
+      <button wx:if="{{!hasProfile}}" class="primary-btn" bindtap="goLogin">微信授权登录并加入</button>
+    </view>
+
+    <view class="team-form soft-card">
+      <block wx:if="{{!hasTeam}}">
+        <text class="form-title">创建小队</text>
+        <input class="input" value="{{teamName}}" placeholder="输入小队名称" bindinput="onTeamNameInput" />
+        <button class="primary-btn" bindtap="createTeam" loading="{{submitting}}">创建并生成分享卡片</button>
+      </block>
+
+      <block wx:else>
+        <view class="team-card compact">
+          <view class="team-main">
+            <text class="team-name">{{team.name}}</text>
+            <text class="team-sub">通过微信卡片邀请好友加入</text>
+          </view>
+          <button wx:if="{{canInvite}}" class="invite-btn" open-type="share">分享</button>
+          <button wx:else class="invite-btn disabled">已满</button>
+        </view>
+      </block>
+    </view>
+
+    <block wx:if="{{hasTeam}}">
+      <view class="section-head">
+        <text class="section-title">成员列表</text>
+        <text class="section-note">{{memberCount}}/3</text>
+      </view>
+
+      <view class="member-list">
+        <view wx:for="{{members}}" wx:key="openid" class="member-card soft-card">
+          <image wx:if="{{item.avatarUrl}}" class="avatar image-avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+          <view wx:else class="avatar" style="background: {{item.color}}">{{item.initial}}</view>
+          <view class="member-info">
+            <view class="member-line">
+              <text class="member-name">{{item.nickname}}</text>
+              <text wx:if="{{item.role === 'owner'}}" class="role-tag">队长</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="section-head recipe-head">
+        <text class="section-title">本队自制菜谱</text>
+        <text class="section-note">{{teamCustomRecipes.length}} 道</text>
+      </view>
+
+      <view wx:if="{{teamCustomRecipes.length}}" class="recipe-grid">
+        <view wx:for="{{teamCustomRecipes}}" wx:key="id" class="recipe-card soft-card" data-id="{{item.id}}" bindtap="openRecipe">
+          <image class="recipe-cover" src="{{item.cover || item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+          <view class="recipe-body">
+            <text class="recipe-title">{{item.title || item.name}}</text>
+            <text class="recipe-desc">{{item.desc || item.description}}</text>
+            <view class="owner-pill">{{item.ownerName}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="empty-panel soft-card">
+        <text class="empty-title">还没有团队自制菜</text>
+        <text class="empty-text">先去上传一道拿手菜，让饭友们闻香集合。</text>
+        <button class="ghost-btn empty-btn" bindtap="goAdd">去添加</button>
+      </view>
+
+      <view class="section-head recipe-head">
+        <text class="section-title">本队收藏菜谱</text>
+        <text class="section-note">{{teamFavoriteRecipes.length}} 道</text>
+      </view>
+
+      <view wx:if="{{teamFavoriteRecipes.length}}" class="recipe-list">
+        <view wx:for="{{teamFavoriteRecipes}}" wx:key="id" class="favorite-row soft-card" data-id="{{item.id}}" bindtap="openRecipe">
+          <image class="favorite-cover" src="{{item.cover || item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+          <view class="favorite-main">
+            <text class="recipe-title">{{item.title || item.name}}</text>
+            <text class="recipe-desc">{{item.desc || item.description}}</text>
+            <view class="owner-pill">{{item.ownerName}} 收藏</view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="empty-panel soft-card">
+        <text class="empty-title">团队还没有收藏</text>
+        <text class="empty-text">遇到喜欢的菜谱后，点爱心就能放进团队菜单。</text>
+      </view>
+    </block>
+  </view>
+</view>

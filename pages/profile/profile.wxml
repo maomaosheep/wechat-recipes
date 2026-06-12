@@ -1,0 +1,6 @@
+<floating-particles enabled="{{true}}" count="{{56}}" density="normal" opacity="{{0.48}}" />
+<view class="page-shell profile-page">
+  <view class="placeholder soft-card">
+    <text class="placeholder-title">等待开发</text>
+  </view>
+</view>

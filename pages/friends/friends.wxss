@@ -1,0 +1,502 @@
+page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.friends-root {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.friends-page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100vw;
+  padding: 32rpx 24rpx 96rpx;
+  overflow-x: hidden;
+}
+
+.friends-hero {
+  min-height: 248rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22rpx;
+  padding: 34rpx 28rpx;
+  border-radius: 8rpx;
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(56, 37, 31, 0.18), rgba(56, 37, 31, 0.5)),
+    url("https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=1000&q=72");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  animation: floatIn 420ms ease both;
+}
+
+.hero-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-size: 22rpx;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+.hero-title {
+  margin-top: 10rpx;
+  font-size: 48rpx;
+  font-weight: 900;
+  line-height: 1.12;
+}
+
+.hero-desc {
+  max-width: 460rpx;
+  margin-top: 14rpx;
+  font-size: 25rpx;
+  line-height: 1.45;
+  opacity: 0.92;
+}
+
+.profile-card,
+.team-form {
+  margin-top: 22rpx;
+  padding: 24rpx;
+  animation: floatIn 440ms ease both;
+}
+
+.share-join-card {
+  margin-top: 22rpx;
+  padding: 24rpx;
+  border: 1rpx solid rgba(119, 183, 168, 0.32);
+  background: rgba(255, 255, 255, 0.94);
+  animation: floatIn 440ms ease both;
+}
+
+.share-join-text {
+  display: block;
+  margin-top: 12rpx;
+  color: #5f756f;
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+}
+
+.profile-avatar {
+  width: 88rpx;
+  height: 88rpx;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #f1d9d2;
+}
+
+.profile-copy {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.profile-name {
+  color: #38251f;
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.profile-tip {
+  color: #92766a;
+  font-size: 24rpx;
+}
+
+.form-title {
+  display: block;
+  color: #38251f;
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.form-title.second {
+  margin-top: 28rpx;
+}
+
+.input {
+  height: 84rpx;
+  margin-top: 16rpx;
+  padding: 0 24rpx;
+  border-radius: 12rpx;
+  background: #fff7f2;
+  color: #412824;
+  font-size: 28rpx;
+}
+
+.primary-btn,
+.ghost-btn {
+  height: 84rpx;
+  line-height: 84rpx;
+  margin-top: 18rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.primary-btn {
+  color: #ffffff;
+  background: #d95b6b;
+}
+
+.ghost-btn {
+  color: #d95b6b;
+  background: #fff;
+  border: 1rpx solid rgba(217, 91, 107, 0.35);
+}
+
+.team-meter {
+  width: 132rpx;
+  height: 132rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  padding-top: 34rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.62);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.meter-num {
+  font-size: 48rpx;
+  font-weight: 900;
+}
+
+.meter-label {
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.create-panel,
+.locked-panel,
+.empty-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 24rpx;
+  padding: 54rpx 34rpx;
+  text-align: center;
+  animation: floatIn 460ms ease both;
+}
+
+.create-icon,
+.lock-icon {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 56rpx;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, #f37c6b, #e9567c);
+}
+
+.lock-icon {
+  font-size: 32rpx;
+  background: #77b7a8;
+}
+
+.create-title,
+.lock-title,
+.empty-title {
+  color: #38251f;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.create-text,
+.lock-text,
+.empty-text {
+  color: #866a5f;
+  font-size: 25rpx;
+  line-height: 1.5;
+}
+
+.create-btn,
+.empty-btn {
+  width: 100%;
+  margin-top: 10rpx;
+}
+
+.team-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+  margin-top: 22rpx;
+  padding: 22rpx;
+  animation: floatIn 460ms ease both;
+}
+
+.team-card.compact {
+  margin-top: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.team-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.team-name {
+  color: #38251f;
+  font-size: 34rpx;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.team-sub {
+  color: #92766a;
+  font-size: 23rpx;
+  line-height: 1.35;
+}
+
+.invite-btn {
+  width: 116rpx;
+  height: 64rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8rpx;
+  color: #fff;
+  font-size: 25rpx;
+  font-weight: 800;
+  background: linear-gradient(135deg, #f37c6b, #e9567c);
+}
+
+.invite-btn.disabled {
+  color: #9b8075;
+  background: #f4e4dc;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 30rpx 2rpx 16rpx;
+}
+
+.recipe-head {
+  margin-top: 36rpx;
+}
+
+.section-title {
+  color: #38251f;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.section-note {
+  color: #d15d69;
+  font-size: 23rpx;
+  font-weight: 800;
+}
+
+.member-list,
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.member-card {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 18rpx;
+  animation: floatIn 480ms ease both;
+}
+
+.avatar {
+  width: 78rpx;
+  height: 78rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.image-avatar {
+  background: #f1d9d2;
+}
+
+.member-info {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.member-line {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.member-name {
+  min-width: 0;
+  overflow: hidden;
+  color: #38251f;
+  font-size: 29rpx;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.role-tag,
+.owner-pill {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  max-width: 100%;
+  min-height: 38rpx;
+  padding: 0 12rpx;
+  border-radius: 8rpx;
+  color: #d95b6b;
+  font-size: 21rpx;
+  font-weight: 800;
+  background: #fff0f2;
+}
+
+.member-id {
+  color: #9b8075;
+  font-size: 22rpx;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16rpx;
+}
+
+.recipe-card {
+  min-width: 0;
+  overflow: hidden;
+  animation: floatIn 500ms ease both;
+}
+
+.recipe-cover {
+  width: 100%;
+  height: 188rpx;
+  display: block;
+  background: #f3dfd4;
+}
+
+.recipe-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  padding: 16rpx;
+}
+
+.recipe-title {
+  min-width: 0;
+  overflow: hidden;
+  color: #35231e;
+  font-size: 28rpx;
+  font-weight: 900;
+  line-height: 1.26;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipe-desc {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #80665c;
+  font-size: 23rpx;
+  line-height: 1.42;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.favorite-row {
+  display: grid;
+  grid-template-columns: 150rpx minmax(0, 1fr);
+  gap: 18rpx;
+  padding: 14rpx;
+}
+
+.favorite-cover {
+  width: 150rpx;
+  height: 136rpx;
+  border-radius: 8rpx;
+  background: #f3dfd4;
+}
+
+.favorite-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4rpx 0;
+}
+
+.locked-panel {
+  border-style: dashed;
+  background: rgba(255, 250, 247, 0.88);
+}
+
+.locked-panel.muted {
+  background: rgba(248, 251, 242, 0.86);
+}
+
+.team-card:active,
+.member-card:active,
+.recipe-card:active,
+.favorite-row:active,
+.invite-btn:active,
+.create-btn:active,
+.empty-btn:active {
+  transform: scale(0.99);
+}
+
+@media (max-width: 340px) {
+  .friends-hero {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .team-meter {
+    width: 112rpx;
+    height: 112rpx;
+    padding-top: 26rpx;
+  }
+
+  .recipe-grid {
+    grid-template-columns: 1fr;
+  }
+}

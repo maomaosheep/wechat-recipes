@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "菜谱 DIY",
+  "usingComponents": {
+    "floating-particles": "/components/floating-particles/floating-particles"
+  }
+}

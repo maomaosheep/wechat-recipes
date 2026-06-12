@@ -1,0 +1,21 @@
+.profile-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 140rpx;
+}
+
+.placeholder {
+  width: 100%;
+  min-height: 260rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx;
+}
+
+.placeholder-title {
+  color: #d95b6b;
+  font-size: 36rpx;
+  font-weight: 800;
+}

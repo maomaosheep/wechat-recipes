@@ -1,0 +1,247 @@
+.wheel-root {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.wheel-page {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 80rpx;
+}
+
+.wheel-head {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  padding: 8rpx 4rpx 22rpx;
+}
+
+.eyebrow {
+  color: #d15d69;
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.title {
+  color: #35231d;
+  font-size: 44rpx;
+  font-weight: 800;
+}
+
+.subtitle {
+  color: #80665e;
+  font-size: 25rpx;
+}
+
+.mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8rpx;
+  overflow: hidden;
+  padding: 8rpx;
+}
+
+.mode-tab {
+  height: 66rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8rpx;
+  color: #795b51;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.mode-tab.active {
+  color: #fff;
+  background: linear-gradient(135deg, #ed725f, #e85b80);
+  box-shadow: 0 10rpx 22rpx rgba(228, 91, 111, 0.18);
+}
+
+.wheel-stage {
+  position: relative;
+  width: 650rpx;
+  height: 676rpx;
+  max-width: calc(100vw - 56rpx);
+  margin: 28rpx auto 24rpx;
+}
+
+.wheel-shell {
+  position: absolute;
+  left: 50%;
+  top: 26rpx;
+  width: 650rpx;
+  height: 650rpx;
+  max-width: calc(100vw - 56rpx);
+  max-height: calc(100vw - 56rpx);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #fff 0%, #fffaf7 54%, #ffe5dd 100%);
+  transform: translateX(-50%);
+}
+
+.wheel-shell.picking {
+  box-shadow: 0 18rpx 54rpx rgba(228, 91, 111, 0.2);
+}
+
+.wheel-canvas {
+  width: 600rpx;
+  height: 600rpx;
+  max-width: calc(100vw - 96rpx);
+  max-height: calc(100vw - 96rpx);
+}
+
+.pointer {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 10;
+  width: 78rpx;
+  height: 96rpx;
+  display: flex;
+  justify-content: center;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.pointer::before {
+  content: "";
+  position: absolute;
+  top: 8rpx;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 22rpx solid transparent;
+  border-right: 22rpx solid transparent;
+  border-top: 66rpx solid #e85b80;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 8rpx 12rpx rgba(216, 83, 108, 0.28));
+}
+
+.pointer-dot {
+  position: absolute;
+  top: 4rpx;
+  left: 50%;
+  width: 30rpx;
+  height: 30rpx;
+  border: 5rpx solid #fff;
+  border-radius: 50%;
+  background: #77b7a8;
+  transform: translateX(-50%);
+  box-shadow: 0 8rpx 16rpx rgba(119, 183, 168, 0.22);
+}
+
+.center-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 5;
+  width: 138rpx;
+  height: 138rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -69rpx;
+  margin-top: -69rpx;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 25rpx;
+  font-weight: 900;
+  text-align: center;
+  background: linear-gradient(135deg, #ed725f, #e85b80);
+  box-shadow: 0 14rpx 34rpx rgba(228, 91, 111, 0.25);
+}
+
+.center-button.disabled {
+  opacity: 0.9;
+}
+
+.center-button.pulse {
+  animation: softPulse 900ms ease-in-out infinite;
+}
+
+.status-card {
+  padding: 28rpx;
+  color: #80665e;
+  font-size: 26rpx;
+  text-align: center;
+}
+
+.result-card {
+  display: grid;
+  grid-template-columns: 190rpx 1fr;
+  gap: 22rpx;
+  padding: 18rpx;
+}
+
+.result-in {
+  animation: resultIn 360ms ease both;
+}
+
+.result-image {
+  width: 190rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  background: #f3dfd4;
+}
+
+.result-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10rpx;
+}
+
+.result-label {
+  color: #d95b6b;
+  font-size: 23rpx;
+  font-weight: 800;
+}
+
+.result-title {
+  color: #32211c;
+  font-size: 32rpx;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.result-desc {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #80665e;
+  font-size: 24rpx;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.mode-tab:active,
+.center-button:active,
+.result-card:active {
+  transform: scale(0.99);
+}
+
+@keyframes softPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes resultIn {
+  from {
+    opacity: 0;
+    transform: translateY(18rpx) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

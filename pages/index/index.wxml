@@ -1,0 +1,166 @@
+﻿<view class="home-root">
+  <floating-particles
+    enabled="{{particlesEnabled}}"
+    count="{{particleOptions.count}}"
+    density="{{particleOptions.density}}"
+    opacity="{{particleOptions.opacity}}"
+  />
+
+  <view class="page-shell home-page">
+    <view class="topbar">
+      <view class="title-block">
+        <text class="eyebrow">Couple Kitchen</text>
+        <text class="title">今天也一起好好吃饭</text>
+        <text wx:if="{{team}}" class="team-line">{{team.name}}</text>
+      </view>
+      <view class="top-actions">
+        <button class="friend-entry" bindtap="goFriends">饭友</button>
+        <button wx:if="{{isAdmin}}" class="admin-entry" bindtap="goAdmin">管理</button>
+      </view>
+    </view>
+
+    <swiper
+      wx:if="{{banners.length}}"
+      class="banner-swiper"
+      autoplay="{{true}}"
+      interval="{{3000}}"
+      duration="{{500}}"
+      circular="{{true}}"
+      indicator-dots="{{true}}"
+      indicator-color="rgba(255,255,255,0.48)"
+      indicator-active-color="#ffffff"
+    >
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <view class="banner-card" data-recipe-id="{{item.recipeId}}" bindtap="openBanner">
+          <image class="banner-image" src="{{item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+          <view class="banner-mask"></view>
+          <view class="banner-copy">
+            <text class="banner-kicker">今日推荐</text>
+            <text class="banner-title">{{item.title}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+
+    <view wx:else class="banner-skeleton"></view>
+
+    <view class="tool-panel soft-card">
+      <view class="search-field">
+        <text class="search-icon">⌕</text>
+        <input
+          class="search-input"
+          value="{{searchKeyword}}"
+          placeholder="搜索菜名、食材或步骤"
+          placeholder-class="search-placeholder"
+          confirm-type="search"
+          bindinput="onSearchInput"
+          bindconfirm="submitSearch"
+        />
+        <view class="clear-search {{searchKeyword ? '' : 'hidden'}}" bindtap="clearSearch">×</view>
+      </view>
+      <view class="tool-actions">
+        <view class="search-btn" bindtap="submitSearch">搜索菜谱</view>
+        <view class="add-mini-btn" bindtap="goAdd">+ 自制菜谱</view>
+      </view>
+      <view class="wheel-entry" bindtap="goWheel">今天吃啥</view>
+      <button wx:if="{{isAdmin}}" class="ghost-btn manage-btn" bindtap="goAdmin">管理运营内容</button>
+    </view>
+
+    <view class="category-grid">
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="category-chip {{activeCategory === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="changeCategory"
+      >
+        <view class="chip-icon-wrap">
+          <image wx:if="{{item.icon}}" class="chip-image" src="{{item.icon}}" mode="aspectFit"></image>
+          <text wx:else class="chip-plus">{{item.iconText}}</text>
+        </view>
+        <text class="chip-label">{{item.name}}</text>
+      </view>
+    </view>
+
+    <view class="section-head">
+      <text class="section-title">{{searchKeyword ? '搜索结果' : '精选菜谱'}}</text>
+    </view>
+
+    <view wx:if="{{loading}}" class="skeleton-list">
+      <view wx:for="{{[1,2,3]}}" wx:key="*this" class="recipe-skeleton soft-card">
+        <view class="skeleton-img"></view>
+        <view class="skeleton-lines">
+          <view class="skeleton-line strong"></view>
+          <view class="skeleton-line"></view>
+          <view class="skeleton-line short"></view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="recipe-list">
+      <scroll-view
+        wx:for="{{recipes}}"
+        wx:key="id"
+        class="swipe-scroll"
+        scroll-x="{{true}}"
+        enhanced="{{true}}"
+        show-scrollbar="{{false}}"
+        scroll-with-animation="{{true}}"
+        scroll-left="{{item.scrollLeft}}"
+      >
+        <view class="swipe-track">
+          <view
+            class="recipe-card soft-card"
+            style="animation-delay: {{index * 45}}ms;"
+            data-id="{{item.id}}"
+            bindtap="openDetail"
+          >
+            <view class="recipe-image-wrap">
+              <image class="recipe-image" src="{{item.cover || item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+              <view
+                class="favorite-btn {{item.favorited ? 'active' : ''}}"
+                data-id="{{item.id}}"
+                catchtap="toggleFavorite"
+              >
+                ♥
+              </view>
+            </view>
+            <view class="recipe-info">
+              <view class="recipe-topline">
+                <text class="recipe-name">{{item.title || item.name}}</text>
+                <text class="recipe-time">{{item.timeText || '未填写'}}</text>
+              </view>
+              <text class="recipe-desc">{{item.desc}}</text>
+              <view class="recipe-meta">
+                <text>{{item.materials.length}} 种食材</text>
+                <text>{{item.steps.length}} 步</text>
+                <text wx:if="{{item.recommended}}">推荐</text>
+                <text wx:if="{{item.creatorNickName}}">{{item.creatorNickName}}</text>
+              </view>
+            </view>
+          </view>
+          <view
+            class="delete-action"
+            data-id="{{item.id}}"
+            data-index="{{index}}"
+            catchtap="confirmDeleteRecipe"
+          >
+            删除
+          </view>
+        </view>
+      </scroll-view>
+
+      <button wx:if="{{hasMore}}" class="load-more ghost-btn" loading="{{loadingMore}}" bindtap="loadMore">
+        {{loadingMore ? '加载中...' : '加载更多'}}
+      </button>
+      <view wx:else class="end-tip">已经到底啦</view>
+    </view>
+
+    <view wx:if="{{!loading && recipes.length === 0}}" class="empty soft-card">
+      <text class="empty-title">{{searchKeyword ? '没有搜到菜谱' : '还没有菜谱'}}</text>
+      <text class="empty-text">{{searchKeyword ? '换个关键词试试，比如番茄、鸡胸、甜点。' : '先添加一道属于你们团队的小菜吧。'}}</text>
+      <button wx:if="{{searchKeyword}}" class="ghost-btn" bindtap="clearSearch">清空搜索</button>
+      <button wx:else class="primary-btn" bindtap="goAdd">+ 立即添加</button>
+    </view>
+  </view>
+</view>

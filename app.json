@@ -1,0 +1,75 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/wheel/wheel",
+    "pages/favorites/favorites",
+    "pages/friends/friends",
+    "pages/profile/profile"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/detail",
+      "pages": [
+        "detail"
+      ]
+    },
+    {
+      "root": "pages/add",
+      "pages": [
+        "add"
+      ]
+    },
+    {
+      "root": "pages/admin",
+      "pages": [
+        "admin"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "菜谱 DIY",
+    "navigationBarBackgroundColor": "#fff7f2",
+    "backgroundColor": "#fff7f2"
+  },
+  "usingComponents": {
+    "floating-particles": "/components/floating-particles/floating-particles"
+  },
+  "tabBar": {
+    "color": "#8C7A73",
+    "selectedColor": "#E85B80",
+    "backgroundColor": "#fffaf7",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/wheel/wheel",
+        "text": "今天吃啥",
+        "iconPath": "assets/tabbar/random.png",
+        "selectedIconPath": "assets/tabbar/random-active.png"
+      },
+      {
+        "pagePath": "pages/favorites/favorites",
+        "text": "收藏",
+        "iconPath": "assets/tabbar/favorite.png",
+        "selectedIconPath": "assets/tabbar/favorite-active.png"
+      },
+      {
+        "pagePath": "pages/friends/friends",
+        "text": "饭友",
+        "iconPath": "assets/tabbar/profile.png",
+        "selectedIconPath": "assets/tabbar/profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

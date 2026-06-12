@@ -1,0 +1,59 @@
+﻿<floating-particles enabled="{{true}}" count="{{72}}" density="high" opacity="{{0.62}}" />
+<view class="page-shell add-page">
+  <view class="intro">
+    <text class="eyebrow">Make Your Recipe</text>
+    <text class="title">记录你们自己的味道</text>
+    <text class="subtitle">一张图、一点材料、几步做法，会自动上传到云端并留在团队菜谱里。</text>
+  </view>
+
+  <view class="form-card soft-card">
+    <button class="image-picker" bindtap="chooseImage">
+      <image wx:if="{{image}}" class="picked-image" src="{{image}}" mode="aspectFill"></image>
+      <view wx:else class="picker-empty">
+        <text class="picker-icon">+</text>
+        <text>上传菜谱图片</text>
+      </view>
+    </button>
+
+    <view class="field">
+      <text class="field-label">菜名</text>
+      <input class="input" value="{{name}}" placeholder="例如：周末番茄意面" data-field="name" bindinput="updateField" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">简单描述</text>
+      <textarea class="textarea" value="{{desc}}" placeholder="写一句适合你们的介绍" data-field="desc" bindinput="updateField" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">烹饪时间</text>
+      <input class="input" value="{{time}}" placeholder="例如：25 分钟" data-field="time" bindinput="updateField" />
+    </view>
+  </view>
+
+  <view class="form-card soft-card">
+    <view class="list-head">
+      <text class="section-title">材料</text>
+      <button class="mini-btn" data-type="materials" bindtap="addListItem">+ 添加</button>
+    </view>
+    <view wx:for="{{materials}}" wx:key="index" class="row-input">
+      <input class="input" value="{{item}}" placeholder="例如：番茄 2 个" data-type="materials" data-index="{{index}}" bindinput="updateListItem" />
+      <button class="remove-btn" data-type="materials" data-index="{{index}}" bindtap="removeListItem">×</button>
+    </view>
+  </view>
+
+  <view class="form-card soft-card">
+    <view class="list-head">
+      <text class="section-title">步骤</text>
+      <button class="mini-btn" data-type="steps" bindtap="addListItem">+ 添加</button>
+    </view>
+    <view wx:for="{{steps}}" wx:key="index" class="row-input step-row">
+      <textarea class="textarea small" value="{{item}}" placeholder="写下第 {{index + 1}} 步" data-type="steps" data-index="{{index}}" bindinput="updateListItem" />
+      <button class="remove-btn" data-type="steps" data-index="{{index}}" bindtap="removeListItem">×</button>
+    </view>
+  </view>
+
+  <button class="primary-btn save-btn" loading="{{saving}}" disabled="{{saving}}" bindtap="saveRecipe">
+    {{saving ? '正在上传...' : '保存并上传菜谱'}}
+  </button>
+</view>

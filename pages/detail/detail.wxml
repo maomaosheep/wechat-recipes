@@ -1,0 +1,50 @@
+<floating-particles enabled="{{true}}" count="{{72}}" density="high" opacity="{{0.62}}" />
+<view class="page-shell detail-page">
+  <view wx:if="{{loading}}" class="detail-loading soft-card">
+    <view class="loading-cover"></view>
+    <view class="loading-line strong"></view>
+    <view class="loading-line"></view>
+  </view>
+
+  <block wx:else>
+    <view wx:if="{{recipe}}" class="cover-wrap">
+      <image class="cover" src="{{recipe.cover}}" mode="aspectFill" lazy-load="{{true}}"></image>
+      <view class="cover-shade"></view>
+      <view class="detail-favorite {{isFavorite ? 'active' : ''}}" bindtap="toggleFavorite">♥</view>
+      <view class="cover-copy">
+        <text class="label">{{isCustom ? '你们的自制菜谱' : '精选灵感菜谱'}}</text>
+        <text class="name">{{recipe.title}}</text>
+        <text class="desc">{{recipe.desc || recipe.description}}</text>
+        <text wx:if="{{recipe.creatorNickName}}" class="desc">创建人：{{recipe.creatorNickName}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{recipe}}" class="time-card soft-card">
+      <text class="time-label">烹饪时间</text>
+      <text class="time-value">{{recipe.timeText || '未填写'}}</text>
+    </view>
+
+    <view wx:if="{{recipe}}" class="content-section soft-card">
+      <view class="section-title">食材</view>
+      <view class="material-grid">
+        <view wx:for="{{recipe.materials}}" wx:key="*this" class="material-item">
+          <text class="dot"></text>
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{recipe}}" class="content-section soft-card">
+      <view class="section-title">步骤</view>
+      <view class="step-list">
+        <view wx:for="{{recipe.steps}}" wx:key="index" class="step-item">
+          <image class="step-image" src="{{item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+          <view class="step-copy">
+            <text class="step-no">{{index + 1}}</text>
+            <text class="step-text">{{item.text}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

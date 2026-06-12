@@ -1,0 +1,58 @@
+.login-root {
+  position: relative;
+  min-height: 100vh;
+}
+
+.login-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56rpx 32rpx;
+  box-sizing: border-box;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+  margin-bottom: 30rpx;
+}
+
+.eyebrow {
+  color: #d95b6b;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.title {
+  color: #412824;
+  font-size: 48rpx;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.subtitle {
+  color: #7a5c55;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.panel {
+  padding: 30rpx;
+  border-radius: 16rpx;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16rpx 42rpx rgba(142, 83, 70, 0.12);
+}
+
+.primary-btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #ffffff;
+  background: #d95b6b;
+}

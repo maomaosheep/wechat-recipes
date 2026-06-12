@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "饭友",
+  "usingComponents": {
+    "floating-particles": "/components/floating-particles/floating-particles"
+  }
+}

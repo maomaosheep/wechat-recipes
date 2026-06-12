@@ -1,0 +1,3 @@
+<view wx:if="{{enabled}}" class="particle-layer">
+  <canvas id="particleCanvas" type="2d" class="particle-canvas"></canvas>
+</view>

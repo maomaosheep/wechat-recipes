@@ -1,0 +1,52 @@
+<view class="wheel-root">
+  <floating-particles
+    enabled="{{particlesEnabled}}"
+    count="{{particleOptions.count}}"
+    density="{{particleOptions.density}}"
+    opacity="{{particleOptions.opacity}}"
+  />
+
+  <view class="page-shell wheel-page">
+    <view class="wheel-head">
+      <text class="eyebrow">Dinner Picker</text>
+      <text class="title">今天吃啥</text>
+      <text class="subtitle">先选范围，再让转盘替你们决定今晚的味道。</text>
+    </view>
+
+    <view class="mode-tabs soft-card">
+      <view
+        wx:for="{{modes}}"
+        wx:key="id"
+        class="mode-tab {{activeMode === item.id ? 'active' : ''}}"
+        data-mode="{{item.id}}"
+        bindtap="switchMode"
+      >
+        {{item.name}}
+      </view>
+    </view>
+
+    <view class="wheel-stage">
+      <view class="wheel-shell soft-card {{spinning ? 'picking' : ''}}">
+        <canvas id="wheelCanvas" type="2d" class="wheel-canvas"></canvas>
+        <view class="center-button {{spinning ? 'disabled pulse' : ''}}" bindtap="startSpin">
+          <text>{{spinText}}</text>
+        </view>
+      </view>
+      <view class="pointer">
+        <view class="pointer-dot"></view>
+      </view>
+    </view>
+
+    <view wx:if="{{loading}}" class="status-card soft-card">正在读取菜谱...</view>
+    <view wx:elif="{{emptyText}}" class="status-card soft-card">{{emptyText}}</view>
+
+    <view wx:if="{{result}}" class="result-card soft-card result-in" bindtap="openResult">
+      <image class="result-image" src="{{result.cover || result.image}}" mode="aspectFill"></image>
+      <view class="result-copy">
+        <text class="result-label">今晚就吃</text>
+        <text class="result-title">{{result.title || result.name}}</text>
+        <text class="result-desc">{{result.desc}}</text>
+      </view>
+    </view>
+  </view>
+</view>

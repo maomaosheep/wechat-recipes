@@ -1,0 +1,86 @@
+<floating-particles enabled="{{true}}" count="{{72}}" density="high" opacity="{{0.62}}" />
+<view class="page-shell admin-page">
+  <view wx:if="{{!authorized}}" class="locked soft-card">
+    <text class="locked-title">无管理员权限</text>
+    <text class="locked-text">请将当前 openid 加入 utils/config.js 的 adminOpenids 白名单。</text>
+  </view>
+
+  <block wx:else>
+    <view class="admin-head">
+      <text class="eyebrow">Admin Console</text>
+      <text class="title">运营管理</text>
+    </view>
+
+    <view class="tabs">
+      <button class="tab {{tab === 'recipes' ? 'active' : ''}}" data-tab="recipes" bindtap="switchTab">菜谱</button>
+      <button class="tab {{tab === 'banners' ? 'active' : ''}}" data-tab="banners" bindtap="switchTab">轮播图</button>
+    </view>
+
+    <view wx:if="{{tab === 'recipes'}}" class="panel soft-card">
+      <view class="panel-title">菜谱编辑</view>
+      <button class="image-picker" bindtap="chooseRecipeCover">
+        <image wx:if="{{recipeForm.cover}}" class="picked-image" src="{{recipeForm.cover}}" mode="aspectFill"></image>
+        <text wx:else>+ 上传封面图</text>
+      </button>
+      <input class="input" placeholder="标题" value="{{recipeForm.title}}" data-field="title" bindinput="updateRecipeField" />
+      <textarea class="textarea" placeholder="简介" value="{{recipeForm.desc}}" data-field="desc" bindinput="updateRecipeField" />
+      <input class="input" placeholder="制作时间，例如 30 分钟" value="{{recipeForm.time}}" data-field="time" bindinput="updateRecipeField" />
+      <picker range="{{categories}}" range-key="name" bindchange="pickCategory">
+        <view class="picker-field">分类：{{recipeForm.category}}</view>
+      </picker>
+      <textarea class="textarea tall" placeholder="食材列表，每行一个" value="{{recipeForm.materialsText}}" data-field="materialsText" bindinput="updateRecipeField" />
+      <textarea class="textarea tall" placeholder="步骤，每行一步；步骤图默认使用封面图" value="{{recipeForm.stepsText}}" data-field="stepsText" bindinput="updateRecipeField" />
+      <label class="switch-row">
+        <text>是否推荐</text>
+        <switch checked="{{recipeForm.recommended}}" color="#e85b80" bindchange="toggleRecommended" />
+      </label>
+      <view class="form-actions">
+        <button class="primary-btn" bindtap="saveRecipe">保存菜谱</button>
+        <button class="ghost-btn" bindtap="resetRecipeForm">清空</button>
+      </view>
+    </view>
+
+    <view wx:if="{{tab === 'recipes'}}" class="list-panel">
+      <view wx:for="{{recipes}}" wx:key="id" class="admin-item soft-card">
+        <image class="item-img" src="{{item.cover || item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+        <view class="item-main">
+          <text class="item-title">{{item.title || item.name}}</text>
+          <text class="item-sub">{{item.category}} · {{item.time}}</text>
+          <view class="item-actions">
+            <button class="small-btn" data-id="{{item.id}}" bindtap="editRecipe">编辑</button>
+            <button class="small-btn danger" data-id="{{item.id}}" bindtap="deleteRecipe">删除</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{tab === 'banners'}}" class="panel soft-card">
+      <view class="panel-title">轮播图编辑</view>
+      <button class="image-picker banner-picker" bindtap="chooseBannerImage">
+        <image wx:if="{{bannerForm.image}}" class="picked-image" src="{{bannerForm.image}}" mode="aspectFill"></image>
+        <text wx:else>+ 上传轮播图</text>
+      </button>
+      <input class="input" placeholder="轮播标题" value="{{bannerForm.title}}" data-field="title" bindinput="updateBannerField" />
+      <input class="input" placeholder="跳转菜谱 ID" value="{{bannerForm.recipeId}}" data-field="recipeId" bindinput="updateBannerField" />
+      <input class="input" type="number" placeholder="排序，数字越小越靠前" value="{{bannerForm.sort}}" data-field="sort" bindinput="updateBannerField" />
+      <view class="form-actions">
+        <button class="primary-btn" bindtap="saveBanner">保存轮播图</button>
+        <button class="ghost-btn" bindtap="resetBannerForm">清空</button>
+      </view>
+    </view>
+
+    <view wx:if="{{tab === 'banners'}}" class="list-panel">
+      <view wx:for="{{banners}}" wx:key="id" class="admin-item soft-card">
+        <image class="item-img banner-img" src="{{item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+        <view class="item-main">
+          <text class="item-title">{{item.title}}</text>
+          <text class="item-sub">菜谱 ID：{{item.recipeId}} · 排序 {{item.sort}}</text>
+          <view class="item-actions">
+            <button class="small-btn" data-id="{{item.id}}" bindtap="editBanner">编辑</button>
+            <button class="small-btn danger" data-id="{{item.id}}" bindtap="deleteBanner">删除</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
